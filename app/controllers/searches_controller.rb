@@ -3,14 +3,19 @@ require 'open-uri'
 
 class SearchesController < ApplicationController
   def index
-  	@searchDisplay = Nokogiri::HTML(open("http://www.walmart.com/ip/Lost-The-Complete-Third-Season-Unexplored-Experience-Widescreen/5978156"))
+
+  end
+
+  def create
+  	url = "http://www.walmart.com/search/?query=" + params[:search]
+  	@searchDisplay = Nokogiri::HTML(open(url))
   	@wordArray = []
 
-  	@searchDisplay.css(".ResponsiveContainer").each do |item|  
-   		@wordArray << item.text.gsub(/\s+/, " ")
+  	@searchDisplay.css(".js-product-title").each_with_index do |item, index| 
+   		@wordArray << { href: item['href'], title: item.text, image: item.xpath('img') }
+   		# .text.gsub(/\s+/, " ")
 		end
 
 		@wordArray
-
   end
 end

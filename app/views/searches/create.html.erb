@@ -1,0 +1,8 @@
+
+<% @wordArray.each_with_index do |item, index| %>
+	<div class="row">
+	<%= link_to item[:title], ("http://walmart.com" + item[:href]) %>
+	<%= item[:image] %>
+
+	</div>
+<% end %>

@@ -1,2 +1,13 @@
 
-<p><%= @wordArray %></p>
+<div class="row">
+	<div class="col-md-6">
+		<%= form_tag searches_path, :method => 'post' do %>
+			<div class="input-group">
+		    <%= text_field_tag :search, params[:search], :class => 'form-control' %>
+		    <span class="input-group-btn">
+		    	<%= submit_tag "Search", :name => nil, :class => 'btn btn-default' %>
+		    </span>
+		  </div>
+		<% end %>
+	</div>
+</div>
